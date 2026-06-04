@@ -1,0 +1,10 @@
+{
+  "projectId": "phc-pharmacy",
+  "appId": "1:609448327523:web:087537cd9867eca594bb56",
+  "apiKey": "AIzaSyBy4blraJeL1hJHjkh5QIHdkLguMmKFLUg",
+  "authDomain": "phc-pharmacy.firebaseapp.com",
+  "firestoreDatabaseId": "(default)",
+  "storageBucket": "phc-pharmacy.firebasestorage.app",
+  "messagingSenderId": "609448327523",
+  "measurementId": "G-810JV6M3W6"
+}

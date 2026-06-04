@@ -1,0 +1,5 @@
+{
+  "name": "Premium Health Care Pharmacy",
+  "description": "Premium Health Care Retail & Compound Pharmacy. Farmacia con servicios de medicina personalizada, entregas a domicilio optimizadas y programación de pedidos de medicamentos recetados.",
+  "requestFramePermissions": ["camera"]
+}

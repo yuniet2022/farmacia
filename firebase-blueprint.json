@@ -1,0 +1,139 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Información del perfil del usuario.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["customer", "admin"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Category": {
+      "title": "Categoría",
+      "description": "Categorías de medicamentos.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "nameEs": { "type": "string" },
+        "description": { "type": "string" },
+        "descriptionEs": { "type": "string" }
+      },
+      "required": ["name", "nameEs"]
+    },
+    "Product": {
+      "title": "Medicamento",
+      "description": "Detalles del medicamento.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "nameEs": { "type": "string" },
+        "description": { "type": "string" },
+        "descriptionEs": { "type": "string" },
+        "price": { "type": "number" },
+        "category": { "type": "string" },
+        "categoryId": { "type": "string" },
+        "subCategory": { "type": "string" },
+        "prescriptionRequired": { "type": "boolean" },
+        "stock": { "type": "integer" },
+        "imageUrl": { "type": "string", "format": "uri" }
+      },
+      "required": ["name", "price", "categoryId", "prescriptionRequired"]
+    },
+    "Order": {
+      "title": "Pedido",
+      "description": "Detalles de la compra y logística.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "items": { "type": "array" },
+        "total": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "processing", "ready_for_pickup", "shipped", "out_for_delivery", "delivered", "cancelled"] },
+        "paymentMethod": { "type": "string", "enum": ["visa", "paypal"] },
+        "prescriptionUrl": { "type": "string", "format": "uri" },
+        "orderType": { "type": "string", "enum": ["instant", "scheduled"] },
+        "scheduledDate": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "language": { "type": "string", "enum": ["en", "es"] },
+        "shippingAddress": { "type": "object" },
+        "deliveryInfo": { "type": "object" }
+      },
+      "required": ["userId", "items", "total", "status", "language"]
+    },
+    "Driver": {
+      "title": "Repartidor",
+      "description": "Perfil del repartidor interno.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "status": { "type": "string", "enum": ["available", "busy", "offline"] },
+        "currentLocation": { "type": "object" },
+        "activeRouteId": { "type": "string" }
+      },
+      "required": ["id", "name", "status"]
+    },
+    "Route": {
+      "title": "Ruta de Entrega",
+      "description": "Planificación de paradas para un repartidor.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "driverId": { "type": "string" },
+        "orderIds": { "type": "array" },
+        "status": { "type": "string", "enum": ["pending", "active", "completed"] },
+        "optimizedStops": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["driverId", "orderIds", "status"]
+    },
+    "Branding": {
+      "title": "Branding",
+      "description": "Configuración visual de la marca.",
+      "type": "object",
+      "properties": {
+        "heroImage": { "type": "string" },
+        "logoUrl": { "type": "string" },
+        "supportImage": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "/branding/{brandingId}": {
+      "schema": "Branding",
+      "description": "Configuración del diseño y marca de la farmacia."
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Perfiles de usuario."
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Catálogo de medicamentos."
+    },
+    "/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "Categorías de medicamentos."
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Historial de pedidos."
+    },
+    "/drivers/{driverId}": {
+      "schema": "Driver",
+      "description": "Gestión de repartidores."
+    },
+    "/routes/{routeId}": {
+      "schema": "Route",
+      "description": "Rutas de entrega programadas."
+    }
+  }
+}
